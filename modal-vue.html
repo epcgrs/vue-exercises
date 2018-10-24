@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
+	<title>Modal vue</title>
+	<style>
+	body {
+		padding-top: 40px;
+	}
+</style>
+</head>
+<body>
+	<div id="app">
+		
+		<modal v-if="showModal" @close="showModal = false">
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia dolorem sint adipisci, commodi enim animi minus debitis, aliquid aspernatur ex soluta maxime sunt, quibusdam. Consequatur officia veniam quam deleniti perspiciatis?</p>
+		</modal>
+
+		<button type="button" @click="showModal = true">Show modal</button>
+
+	</div>
+	
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+	<script>
+
+		Vue.component('modal', {
+			template: `
+			<div class="modal is-active">
+				<div class="modal-background"></div>
+				<div class="modal-content">
+					<div class="box">
+						<p><slot></slot></p>
+					</div>
+				</div>
+				<button class="modal-close is-large" aria-label="close" @click="$emit('close')"></button>
+			</div>
+			`,
+		});
+		
+
+		new Vue({
+			el: '#app',
+			data: {
+				showModal: false,
+			},
+		});
+
+	</script>
+</body>
+</html>

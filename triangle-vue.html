@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<h1>{{message}}</h1>
+		<div class="form">
+			<label for="lado1">
+				Lado 1:
+				<input type="text" step="any" id="lado1" v-model="lado1">
+			</label>
+			<br>
+			<label for="lado2">
+				Lado 2:
+				<input type="text" step="any" id="lado2" v-model="lado2">
+			</label>
+			<br>
+			<label for="lado3">
+				Lado 3:
+				<input type="text" step="any" id="lado3" v-model="lado3">
+			</label>
+			<p id="result">o triangulo é: <h3>{{triangulo}}</h3></p>
+		</div>
+	</div>
+	<script>
+		var app = new Vue({
+			el: '#app',
+			data: {
+				message: 'Tipo de triangulo!',
+				lado1: '',
+				lado2: '',
+				lado3: '',
+				result: '',
+			},
+			computed: {
+				triangulo: function() {
+					let r = this.result;
+					if (this.lado1.length>0  && this.lado2.length>0 && this.lado3.length>0) {
+						if (this.lado1>0 && this.lado2>0 && this.lado3>0) {
+							if (this.lado1 == this.lado2 && this.lado2 == this.lado3) {
+								r = 'equilátero';
+							} else if(this.lado1 == this.lado2 || this.lado2 == this.lado3 || this.lado3 == this.lado1) {
+								r = 'isóceles';
+							} else if (this.lado1 != this.lado2 && this.lado2 != this.lado3 && this.lado1 != this.lado3) {
+								r = 'escaleno';
+							}
+
+						} else {
+							r = 'Erro! Números negativos';
+						}
+					} else {
+						r = 'Digite os comprimentos';
+					}
+					return r;
+				},
+			},
+
+		})
+
+	</script>
+</body>
+</html>
